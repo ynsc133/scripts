@@ -3,7 +3,7 @@
 #Some constans here
 
 CERT_DOMAIN=''
-CERT_DEFAULT_INSTALL_PATH='/root/cert/'
+CERT_DEFAULT_INSTALL_PATH='/root/hysteria/cert/'
 #包管理工具
 PACKAGE_MANAGER=''
 
@@ -81,7 +81,7 @@ domain_valid_check() {
 install_path_set() {
     cd ~
     local InstallPath=''
-    read -p "请输入证书安装路径(回车默认为/root/cert/):" InstallPath
+    read -p "请输入证书安装路径(回车默认为/root/hysteria/cert/):" InstallPath
     if [[ -n ${InstallPath} ]]; then
         echo "你输入的路径为:${InstallPath}"
     else
@@ -188,9 +188,9 @@ ssl_cert_issue_standalone() {
         echo "证书申请成功,开始安装证书..."
     fi
     #install cert
-    ~/.acme.sh/acme.sh --installcert -d ${CERT_DOMAIN} --ca-file /root/cert/ca.cer \
-    --cert-file /root/cert/${CERT_DOMAIN}.cer --key-file /root/cert/${CERT_DOMAIN}.key \
-    --fullchain-file /root/cert/fullchain.cer
+    ~/.acme.sh/acme.sh --installcert -d ${CERT_DOMAIN} --ca-file /root/hysteria/cert/ca.cer \
+    --cert-file /root/hysteria/cert/${CERT_DOMAIN}.cer --key-file /root/hysteria/cert/${CERT_DOMAIN}.key \
+    --fullchain-file /root/hysteria/cert/fullchain.cer
 
     if [ $? -ne 0 ]; then
         echo "证书安装失败,脚本退出"
@@ -253,9 +253,9 @@ ssl_cert_issue_by_cloudflare() {
         else
             echo "证书签发成功,安装中..."
         fi
-        ~/.acme.sh/acme.sh --installcert -d ${CERT_DOMAIN} -d *.${CERT_DOMAIN} --ca-file /root/cert/ca.cer \
-        --cert-file /root/cert/${CERT_DOMAIN}.cer --key-file /root/cert/${CERT_DOMAIN}.key \
-        --fullchain-file /root/cert/fullchain.cer
+        ~/.acme.sh/acme.sh --installcert -d ${CERT_DOMAIN} -d *.${CERT_DOMAIN} --ca-file /root/hysteria/cert/ca.cer \
+        --cert-file /root/hysteria/cert/${CERT_DOMAIN}.cer --key-file /root/hysteria/cert/${CERT_DOMAIN}.key \
+        --fullchain-file /root/hysteria/cert/fullchain.cer
         if [ $? -ne 0 ]; then
             echo "证书安装失败,脚本退出"
             exit 1
